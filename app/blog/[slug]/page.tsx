@@ -7,7 +7,7 @@ import { PortableText } from 'next-sanity'
 import { sanityFetch } from '@/sanity/lib/live'
 import { POST_QUERY, POST_SLUGS_QUERY, type PostQueryResult, type PostSlugsQueryResult } from '@/sanity/lib/queries'
 import { urlFor } from '@/sanity/lib/image'
-import { client } from '@/sanity/lib/client' // used only for generateStaticParams (no cache needed there)
+import { client } from '@/sanity/lib/client'
 
 export async function generateStaticParams() {
   const slugs = await client
@@ -143,10 +143,11 @@ async function PostContent({ slug }: { slug: string }) {
   )
 }
 
-export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params
+export default function PostPage({ params }: { params: Promise<{ slug: string }> }) {
   return (
     <main>
+      {/* params.then() resolves the slug inside the Suspense boundary,
+          avoiding uncached data access outside Suspense */}
       <Suspense fallback={
         <div className="mx-auto max-w-3xl px-6 py-12 space-y-4 animate-pulse">
           <div className="h-3 bg-zinc-200 rounded w-48" />
@@ -155,7 +156,9 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
           <div className="aspect-video bg-zinc-200 rounded-xl mt-8" />
         </div>
       }>
-        <PostContent slug={slug} />
+        {params.then(({ slug }) => (
+          <PostContent slug={slug} />
+        ))}
       </Suspense>
     </main>
   )

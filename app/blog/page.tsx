@@ -77,13 +77,11 @@ async function PostList({ category }: { category?: string }) {
   )
 }
 
-export default async function BlogPage({
+export default function BlogPage({
   searchParams,
 }: {
   searchParams: Promise<{ category?: string }>
 }) {
-  const { category } = await searchParams
-
   return (
     <main>
       {/* Page header */}
@@ -100,17 +98,18 @@ export default async function BlogPage({
           </h1>
           <p className="mt-2 text-muted text-sm ml-4">Les dernières nouvelles de l&apos;association</p>
 
-          {/* Category filter pills */}
+          {/* Category filter pills — resolves searchParams inside Suspense */}
           <Suspense fallback={<div className="mt-6 h-9" />}>
-            <CategoryNav currentCategory={category} />
+            {searchParams.then(({ category }) => (
+              <CategoryNav currentCategory={category} />
+            ))}
           </Suspense>
         </div>
       </div>
 
-      {/* Grid */}
+      {/* Post grid — resolves searchParams inside Suspense */}
       <div className="mx-auto max-w-6xl px-6 py-12">
         <Suspense
-          key={category ?? 'all'}
           fallback={
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {[1, 2, 3, 4, 5, 6].map((i) => (
@@ -119,7 +118,9 @@ export default async function BlogPage({
             </div>
           }
         >
-          <PostList category={category} />
+          {searchParams.then(({ category }) => (
+            <PostList category={category} />
+          ))}
         </Suspense>
       </div>
     </main>
