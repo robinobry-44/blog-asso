@@ -1,65 +1,146 @@
-import Image from "next/image";
+import { Suspense } from 'react'
+import Image from 'next/image'
+import Link from 'next/link'
+import { sanityFetch } from '@/sanity/lib/live'
+import { POSTS_QUERY, SITE_SETTINGS_QUERY, type PostsQueryResult, type SiteSettingsQueryResult } from '@/sanity/lib/queries'
+import { urlFor } from '@/sanity/lib/image'
+import ArticleCard from './components/ArticleCard'
+
+async function Hero() {
+  'use cache'
+  const { data } = await sanityFetch({ query: SITE_SETTINGS_QUERY })
+  const settings = data as SiteSettingsQueryResult
+  const heroImageUrl = settings?.heroImage
+    ? urlFor(settings.heroImage).width(1600).height(560).fit('crop').auto('format').url()
+    : null
+  const tagline = settings?.tagline ?? "Une association citoyenne engagée pour le développement et la qualité de vie à Trinité-sur-Mer."
+
+  return (
+    <section className="relative overflow-hidden bg-primary">
+      {/* Background image */}
+      {heroImageUrl && (
+        <>
+          <Image
+            src={heroImageUrl}
+            alt={settings?.heroImage?.alt ?? 'Trinité-sur-Mer'}
+            fill
+            className="object-cover object-center"
+            priority
+          />
+          {/* Gradient overlay: left is opaque blue, right fades to semi-transparent */}
+          <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/85 to-primary/50" />
+        </>
+      )}
+
+      {/* Content */}
+      <div className="relative z-10 mx-auto max-w-6xl px-6 py-12 sm:py-16 lg:py-20">
+        <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-white/60 mb-6">
+          <span className="h-px w-6 bg-accent-yellow" />
+          Trinité-sur-Mer, Morbihan
+        </span>
+
+        <h1 className="font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl text-white leading-tight tracking-tight max-w-2xl">
+          Agir Avec{' '}
+          <span className="relative inline-block">
+            <span className="relative z-10">Vous Tous</span>
+            <span aria-hidden className="absolute left-0 -bottom-1 h-2.5 w-full bg-accent-yellow" />
+          </span>
+        </h1>
+
+        <p className="mt-5 text-base sm:text-lg text-white/75 leading-relaxed max-w-xl">
+          {tagline}
+        </p>
+
+        <div className="mt-8 flex flex-wrap gap-3">
+          <Link
+            href="/blog"
+            className="bg-white text-primary font-semibold text-sm px-5 py-2.5 rounded-md hover:bg-white/90 transition-colors"
+          >
+            Nos actualités
+          </Link>
+          <Link
+            href="/a-propos"
+            className="border border-white/30 text-white font-medium text-sm px-5 py-2.5 rounded-md hover:bg-white/10 transition-colors"
+          >
+            Qui sommes-nous ?
+          </Link>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+async function LatestArticles() {
+  'use cache'
+  const { data } = await sanityFetch({ query: POSTS_QUERY })
+  const posts = ((data ?? []) as PostsQueryResult).slice(0, 3)
+  if (posts.length === 0) return null
+  return (
+    <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {posts.map((post) => <ArticleCard key={post._id} post={post} />)}
+    </div>
+  )
+}
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <>
+      <Suspense fallback={
+        <div className="bg-primary h-64 animate-pulse" />
+      }>
+        <Hero />
+      </Suspense>
+
+      {/* Latest articles */}
+      <section className="mx-auto max-w-6xl px-6 py-14 sm:py-16">
+        <div className="flex items-end justify-between mb-10">
+          <h2 className="font-display font-extrabold text-2xl sm:text-3xl text-text flex items-center gap-3">
+            <span className="block h-7 w-1 bg-accent-yellow shrink-0" />
+            Dernières actualités
+          </h2>
+          <Link
+            href="/blog"
+            className="hidden sm:inline-flex text-sm font-medium text-primary hover:text-primary-dark transition-colors"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            Tout voir →
+          </Link>
         </div>
-      </main>
-    </div>
-  );
+
+        <Suspense fallback={
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {[1, 2, 3].map((i) => (
+              <div key={i} className="rounded-xl bg-surface border border-zinc-100 border-l-4 border-l-primary/20 aspect-[4/3] animate-pulse" />
+            ))}
+          </div>
+        }>
+          <LatestArticles />
+        </Suspense>
+
+        <div className="mt-8 sm:hidden text-center">
+          <Link
+            href="/blog"
+            className="inline-flex text-sm font-semibold text-primary border border-primary px-5 py-2.5 rounded-md hover:bg-primary/5 transition-colors"
+          >
+            Voir toutes les actualités
+          </Link>
+        </div>
+      </section>
+
+      {/* CTA strip */}
+      <section className="border-t border-zinc-200 bg-surface">
+        <div className="mx-auto max-w-6xl px-6 py-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5">
+          <div>
+            <p className="font-display font-extrabold text-lg text-text">Rejoignez le mouvement</p>
+            <p className="mt-1 text-sm text-muted">Participez à la vie locale et agissez avec nous.</p>
+          </div>
+          <Link
+            href="/contact"
+            className="shrink-0 bg-primary text-white font-semibold text-sm px-5 py-2.5 rounded-md hover:bg-primary-dark transition-colors"
+          >
+            Nous contacter
+          </Link>
+        </div>
+      </section>
+    </>
+  )
 }
