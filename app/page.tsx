@@ -17,7 +17,7 @@ async function Hero() {
   'use cache'
   const { data } = await sanityFetch({ query: SITE_SETTINGS_QUERY })
   const settings = data as SiteSettingsQueryResult
-  const heroImageUrl = settings?.heroImage
+  const heroImageUrl = settings?.heroImage?.asset?._ref
     ? urlFor(settings.heroImage).width(1600).height(560).fit('crop').auto('format').url()
     : null
   const tagline = settings?.tagline ?? "Une association citoyenne engagée pour le développement et la qualité de vie à Trinité-sur-Mer."
