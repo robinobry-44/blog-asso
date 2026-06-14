@@ -46,6 +46,7 @@ function Hero() {
 }
 
 async function LatestArticles() {
+  'use cache'
   const [postsResult, categoriesResult] = await Promise.all([
     sanityFetch({ query: POSTS_QUERY }),
     sanityFetch({ query: CATEGORIES_QUERY }),
