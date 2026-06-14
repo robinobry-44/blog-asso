@@ -1,46 +1,17 @@
 import { Suspense } from 'react'
-import Image from 'next/image'
 import Link from 'next/link'
 import { sanityFetch } from '@/sanity/lib/live'
 import {
   POSTS_QUERY,
   CATEGORIES_QUERY,
-  SITE_SETTINGS_QUERY,
   type PostsQueryResult,
   type CategoriesQueryResult,
-  type SiteSettingsQueryResult,
 } from '@/sanity/lib/queries'
-import { urlFor } from '@/sanity/lib/image'
 import CategoryFilter from './components/CategoryFilter'
 
-async function Hero() {
-  const { data } = await sanityFetch({ query: SITE_SETTINGS_QUERY })
-  const settings = data as SiteSettingsQueryResult
-  const heroImage = settings?.heroImage ?? null
-  const heroImageUrl = heroImage?.asset?._ref
-    ? urlFor(heroImage).width(1600).height(900).fit('clip').auto('format').url()
-    : null
-  const heroTitle = settings?.heroTitle ?? 'Unis Pour La Trinité Sur Mer'
-  const heroSubtitle = settings?.heroSubtitle ?? "Une association citoyenne engagée pour le développement et la qualité de vie à Trinité-sur-Mer."
-
+function Hero() {
   return (
     <section className="relative overflow-hidden bg-primary max-h-[350px]">
-      {/* Background image */}
-      {heroImageUrl && (
-        <>
-          <Image
-            src={heroImageUrl}
-            alt={heroImage?.alt ?? 'Trinité-sur-Mer'}
-            fill
-            className="object-cover object-center"
-            priority
-          />
-          {/* Gradient overlay: left is opaque blue, right fades to semi-transparent */}
-          <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/85 to-primary/50" />
-        </>
-      )}
-
-      {/* Content */}
       <div className="relative z-10 mx-auto max-w-6xl px-6 py-8 sm:py-10">
         <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-white/60 mb-6">
           <span className="h-px w-6 bg-accent-yellow" />
@@ -48,11 +19,11 @@ async function Hero() {
         </span>
 
         <h1 className="font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl text-white leading-tight tracking-tight max-w-2xl">
-          {heroTitle}
+          Unis Pour La Trinité Sur Mer
         </h1>
 
         <p className="mt-5 text-base sm:text-lg text-white/75 leading-relaxed max-w-xl">
-          {heroSubtitle}
+          Une association citoyenne engagée pour le développement et la qualité de vie à Trinité-sur-Mer.
         </p>
 
         <div className="mt-8 flex flex-wrap gap-3">
@@ -88,11 +59,7 @@ async function LatestArticles() {
 export default function Home() {
   return (
     <>
-      <Suspense fallback={
-        <div className="bg-primary h-64 animate-pulse" />
-      }>
-        <Hero />
-      </Suspense>
+      <Hero />
 
       {/* Latest articles */}
       <section className="mx-auto max-w-6xl px-6 py-8 sm:py-10">
