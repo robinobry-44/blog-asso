@@ -23,7 +23,7 @@ async function Hero() {
   const tagline = settings?.tagline ?? "Une association citoyenne engagée pour le développement et la qualité de vie à Trinité-sur-Mer."
 
   return (
-    <section className="relative overflow-hidden bg-primary">
+    <section className="relative overflow-hidden bg-primary max-h-[400px]">
       {/* Background image */}
       {heroImageUrl && (
         <>
@@ -40,7 +40,7 @@ async function Hero() {
       )}
 
       {/* Content */}
-      <div className="relative z-10 mx-auto max-w-6xl px-6 py-12 sm:py-16 lg:py-20">
+      <div className="relative z-10 mx-auto max-w-6xl px-6 py-8 sm:py-10">
         <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-white/60 mb-6">
           <span className="h-px w-6 bg-accent-yellow" />
           Trinité-sur-Mer, Morbihan
@@ -99,7 +99,7 @@ export default function Home() {
       </Suspense>
 
       {/* Latest articles */}
-      <section className="mx-auto max-w-6xl px-6 py-14 sm:py-16">
+      <section className="mx-auto max-w-6xl px-6 py-8 sm:py-10">
         <div className="flex items-end justify-between mb-10">
           <h2 className="font-display font-extrabold text-2xl sm:text-3xl text-text flex items-center gap-3">
             <span className="block h-7 w-1 bg-accent-yellow shrink-0" />
