@@ -67,12 +67,26 @@ export type MembersQueryResult = Member[]
 
 export const SITE_SETTINGS_QUERY = groq`
   *[_type == "siteSettings"][0] {
+    siteName,
+    siteDescription,
     heroImage,
-    tagline,
+    heroTitle,
+    heroSubtitle,
+    primaryColor,
+    contactEmail,
+    contactPhone,
+    address,
   }
 `
 
 export type SiteSettingsQueryResult = {
+  siteName: string | null
+  siteDescription: string | null
   heroImage: import('./types').SanityImage | null
-  tagline: string | null
+  heroTitle: string | null
+  heroSubtitle: string | null
+  primaryColor: string | null
+  contactEmail: string | null
+  contactPhone: string | null
+  address: string | null
 } | null

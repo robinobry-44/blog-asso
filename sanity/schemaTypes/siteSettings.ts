@@ -7,9 +7,24 @@ export const siteSettings = defineType({
   type: 'document',
   icon: CogIcon,
   fields: [
+    // Identité
+    defineField({
+      name: 'siteName',
+      title: 'Nom du site',
+      type: 'string',
+    }),
+    defineField({
+      name: 'siteDescription',
+      title: 'Description SEO',
+      type: 'text',
+      rows: 3,
+      description: 'Phrase courte affichée dans les résultats de recherche Google.',
+    }),
+
+    // Hero
     defineField({
       name: 'heroImage',
-      title: 'Image hero (bannière d\'accueil)',
+      title: 'Image bannière hero',
       type: 'image',
       options: { hotspot: true },
       fields: [
@@ -17,11 +32,42 @@ export const siteSettings = defineType({
       ],
     }),
     defineField({
-      name: 'tagline',
-      title: 'Accroche',
+      name: 'heroTitle',
+      title: 'Titre du hero',
       type: 'string',
-      description: 'Phrase courte sous le titre principal',
-      initialValue: 'Une association citoyenne engagée pour la commune de Trinité-sur-Mer.',
+      description: 'Titre principal affiché sur la bannière d\'accueil.',
+    }),
+    defineField({
+      name: 'heroSubtitle',
+      title: 'Sous-titre du hero',
+      type: 'string',
+      description: 'Phrase d\'accroche sous le titre.',
+    }),
+
+    // Apparence
+    defineField({
+      name: 'primaryColor',
+      title: 'Couleur principale',
+      type: 'string',
+      description: 'Code hexadécimal, ex : #1B6BB5',
+    }),
+
+    // Contact
+    defineField({
+      name: 'contactEmail',
+      title: 'Email de contact',
+      type: 'string',
+    }),
+    defineField({
+      name: 'contactPhone',
+      title: 'Téléphone',
+      type: 'string',
+    }),
+    defineField({
+      name: 'address',
+      title: 'Adresse',
+      type: 'text',
+      rows: 3,
     }),
   ],
   preview: {

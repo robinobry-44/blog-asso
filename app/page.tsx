@@ -14,13 +14,13 @@ import { urlFor } from '@/sanity/lib/image'
 import CategoryFilter from './components/CategoryFilter'
 
 async function Hero() {
-  'use cache'
   const { data } = await sanityFetch({ query: SITE_SETTINGS_QUERY })
   const settings = data as SiteSettingsQueryResult
   const heroImageUrl = settings?.heroImage?.asset?._ref
     ? urlFor(settings.heroImage).width(1600).height(900).fit('clip').auto('format').url()
     : null
-  const tagline = settings?.tagline ?? "Une association citoyenne engagée pour le développement et la qualité de vie à Trinité-sur-Mer."
+  const heroTitle = settings?.heroTitle ?? 'Unis Pour La Trinité Sur Mer'
+  const heroSubtitle = settings?.heroSubtitle ?? "Une association citoyenne engagée pour le développement et la qualité de vie à Trinité-sur-Mer."
 
   return (
     <section className="relative overflow-hidden bg-primary max-h-[350px]">
@@ -47,15 +47,11 @@ async function Hero() {
         </span>
 
         <h1 className="font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl text-white leading-tight tracking-tight max-w-2xl">
-          Unis Pour La{' '}
-          <span className="relative inline-block">
-            <span className="relative z-10">Trinité Sur Mer</span>
-            <span aria-hidden className="absolute left-0 -bottom-1 h-2.5 w-full bg-accent-yellow" />
-          </span>
+          {heroTitle}
         </h1>
 
         <p className="mt-5 text-base sm:text-lg text-white/75 leading-relaxed max-w-xl">
-          {tagline}
+          {heroSubtitle}
         </p>
 
         <div className="mt-8 flex flex-wrap gap-3">
@@ -78,7 +74,6 @@ async function Hero() {
 }
 
 async function LatestArticles() {
-  'use cache'
   const [postsResult, categoriesResult] = await Promise.all([
     sanityFetch({ query: POSTS_QUERY }),
     sanityFetch({ query: CATEGORIES_QUERY }),
