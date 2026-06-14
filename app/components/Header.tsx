@@ -23,17 +23,22 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 bg-surface border-b border-zinc-200">
       <div className="mx-auto max-w-6xl px-6">
-        <div className="flex h-16 items-center justify-between">
-          {/* Logo */}
-          <Link href="/" className="shrink-0">
-            <Image
-              src="/logo.png"
-              alt="Unis pour la Trinité-sur-Mer"
-              width={140}
-              height={79}
-              style={{ height: '48px', width: 'auto', mixBlendMode: 'multiply' }}
-              priority
-            />
+        <div className="flex h-20 items-center justify-between">
+          {/* Logo + title */}
+          <Link href="/" className="flex items-center gap-3 shrink-0">
+            <div className="rounded-xl border border-zinc-100 bg-white px-2 py-0.5 shadow-sm">
+              <Image
+                src="/logo.png"
+                alt="Unis pour la Trinité-sur-Mer"
+                width={140}
+                height={79}
+                style={{ height: '70px', width: 'auto', mixBlendMode: 'multiply' }}
+                priority
+              />
+            </div>
+            <span className="hidden sm:block whitespace-nowrap text-sm font-semibold text-text">
+              Unis Pour La Trinité Sur Mer
+            </span>
           </Link>
 
           {/* Desktop nav */}

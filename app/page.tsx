@@ -18,12 +18,12 @@ async function Hero() {
   const { data } = await sanityFetch({ query: SITE_SETTINGS_QUERY })
   const settings = data as SiteSettingsQueryResult
   const heroImageUrl = settings?.heroImage?.asset?._ref
-    ? urlFor(settings.heroImage).width(1600).height(560).fit('crop').auto('format').url()
+    ? urlFor(settings.heroImage).width(1600).height(900).fit('clip').auto('format').url()
     : null
   const tagline = settings?.tagline ?? "Une association citoyenne engagée pour le développement et la qualité de vie à Trinité-sur-Mer."
 
   return (
-    <section className="relative overflow-hidden bg-primary max-h-[400px]">
+    <section className="relative overflow-hidden bg-primary max-h-[350px]">
       {/* Background image */}
       {heroImageUrl && (
         <>
