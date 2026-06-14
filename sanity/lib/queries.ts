@@ -9,11 +9,11 @@ const postFields = groq`
   excerpt,
   mainImage,
   "author": author->name,
-  "categories": categories[]->{title, "slug": slug.current},
+  "categories": categories[]->{_id, title, "slug": slug.current},
 `
 
 export const POSTS_QUERY = groq`
-  *[_type == "post" && defined(slug.current)] | order(publishedAt desc) {
+  *[_type == "post" && defined(slug.current)] | order(publishedAt desc)[0...6] {
     ${postFields}
   }
 `

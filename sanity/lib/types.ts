@@ -13,6 +13,7 @@ export interface Category {
 }
 
 export interface PostCategory {
+  _id: string
   title: string | null
   slug: string | null
 }

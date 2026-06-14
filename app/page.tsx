@@ -2,9 +2,16 @@ import { Suspense } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { sanityFetch } from '@/sanity/lib/live'
-import { POSTS_QUERY, SITE_SETTINGS_QUERY, type PostsQueryResult, type SiteSettingsQueryResult } from '@/sanity/lib/queries'
+import {
+  POSTS_QUERY,
+  CATEGORIES_QUERY,
+  SITE_SETTINGS_QUERY,
+  type PostsQueryResult,
+  type CategoriesQueryResult,
+  type SiteSettingsQueryResult,
+} from '@/sanity/lib/queries'
 import { urlFor } from '@/sanity/lib/image'
-import ArticleCard from './components/ArticleCard'
+import CategoryFilter from './components/CategoryFilter'
 
 async function Hero() {
   'use cache'
@@ -72,14 +79,14 @@ async function Hero() {
 
 async function LatestArticles() {
   'use cache'
-  const { data } = await sanityFetch({ query: POSTS_QUERY })
-  const posts = ((data ?? []) as PostsQueryResult).slice(0, 3)
+  const [postsResult, categoriesResult] = await Promise.all([
+    sanityFetch({ query: POSTS_QUERY }),
+    sanityFetch({ query: CATEGORIES_QUERY }),
+  ])
+  const posts = (postsResult.data ?? []) as PostsQueryResult
+  const categories = (categoriesResult.data ?? []) as CategoriesQueryResult
   if (posts.length === 0) return null
-  return (
-    <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {posts.map((post) => <ArticleCard key={post._id} post={post} />)}
-    </div>
-  )
+  return <CategoryFilter posts={posts} categories={categories} />
 }
 
 export default function Home() {
