@@ -16,8 +16,9 @@ import CategoryFilter from './components/CategoryFilter'
 async function Hero() {
   const { data } = await sanityFetch({ query: SITE_SETTINGS_QUERY })
   const settings = data as SiteSettingsQueryResult
-  const heroImageUrl = settings?.heroImage?.asset?._ref
-    ? urlFor(settings.heroImage).width(1600).height(900).fit('clip').auto('format').url()
+  const heroImage = settings?.heroImage ?? null
+  const heroImageUrl = heroImage?.asset?._ref
+    ? urlFor(heroImage).width(1600).height(900).fit('clip').auto('format').url()
     : null
   const heroTitle = settings?.heroTitle ?? 'Unis Pour La Trinité Sur Mer'
   const heroSubtitle = settings?.heroSubtitle ?? "Une association citoyenne engagée pour le développement et la qualité de vie à Trinité-sur-Mer."
@@ -29,7 +30,7 @@ async function Hero() {
         <>
           <Image
             src={heroImageUrl}
-            alt={settings?.heroImage?.alt ?? 'Trinité-sur-Mer'}
+            alt={heroImage?.alt ?? 'Trinité-sur-Mer'}
             fill
             className="object-cover object-center"
             priority
