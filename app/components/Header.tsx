@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 
 const navLinks = [
@@ -24,14 +25,15 @@ export default function Header() {
       <div className="mx-auto max-w-6xl px-6">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2.5 shrink-0">
-            <span className="flex h-8 w-8 items-center justify-center bg-primary text-white font-display font-extrabold text-xs">
-              AAT
-            </span>
-            <span className="hidden sm:block text-sm font-semibold text-text tracking-tight leading-none">
-              Agir Avec Vous Tous
-              <span className="block text-xs font-normal text-muted mt-0.5">Trinité-sur-Mer</span>
-            </span>
+          <Link href="/" className="shrink-0">
+            <Image
+              src="/logo.png"
+              alt="Unis pour la Trinité-sur-Mer"
+              width={140}
+              height={79}
+              style={{ height: 'auto' }}
+              priority
+            />
           </Link>
 
           {/* Desktop nav */}

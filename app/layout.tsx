@@ -23,6 +23,10 @@ export const metadata: Metadata = {
     default: 'Agir Avec Vous Tous — Trinité-sur-Mer',
   },
   description: "Association citoyenne engagée pour le développement et le bien-être de la commune de Trinité-sur-Mer.",
+  icons: {
+    icon: '/favicon.png',
+    apple: '/favicon.png',
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
