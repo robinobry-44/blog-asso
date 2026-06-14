@@ -31,7 +31,7 @@ export default function Header() {
               alt="Unis pour la Trinité-sur-Mer"
               width={140}
               height={79}
-              style={{ height: 'auto' }}
+              style={{ height: '48px', width: 'auto', mixBlendMode: 'multiply' }}
               priority
             />
           </Link>
