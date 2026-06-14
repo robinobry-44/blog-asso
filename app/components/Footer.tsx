@@ -6,7 +6,7 @@ export default function Footer() {
       <div className="mx-auto max-w-6xl px-6 pt-16 pb-10">
         {/* Large asso name */}
         <p className="font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl text-white leading-none mb-2">
-          Agir Avec<br />Vous Tous
+          Unis Pour La<br />Trinité Sur Mer
         </p>
         <p className="text-muted text-sm mb-12">Trinité-sur-Mer — Morbihan</p>
 
@@ -49,7 +49,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-10 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs text-white/30">
-          <p>© 2026 Agir Avec Vous Tous</p>
+          <p>© 2026 Unis Pour La Trinité Sur Mer</p>
           <p>Tous droits réservés</p>
         </div>
       </div>

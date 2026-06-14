@@ -47,9 +47,9 @@ async function Hero() {
         </span>
 
         <h1 className="font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl text-white leading-tight tracking-tight max-w-2xl">
-          Agir Avec{' '}
+          Unis Pour La{' '}
           <span className="relative inline-block">
-            <span className="relative z-10">Vous Tous</span>
+            <span className="relative z-10">Trinité Sur Mer</span>
             <span aria-hidden className="absolute left-0 -bottom-1 h-2.5 w-full bg-accent-yellow" />
           </span>
         </h1>

@@ -19,8 +19,8 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    template: '%s — Agir Avec Vous Tous',
-    default: 'Agir Avec Vous Tous — Trinité-sur-Mer',
+    template: '%s — Unis Pour La Trinité Sur Mer',
+    default: 'Unis Pour La Trinité Sur Mer',
   },
   description: "Association citoyenne engagée pour le développement et le bien-être de la commune de Trinité-sur-Mer.",
   icons: {

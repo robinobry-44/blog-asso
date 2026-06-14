@@ -13,7 +13,7 @@ import ArticleCard from '../components/ArticleCard'
 
 export const metadata: Metadata = {
   title: 'Blog',
-  description: "Toutes les actualités et articles de l'association Agir Avec Vous Tous.",
+  description: "Toutes les actualités et articles de l'association Unis Pour La Trinité Sur Mer.",
 }
 
 async function CategoryNav({ currentCategory }: { currentCategory?: string }) {

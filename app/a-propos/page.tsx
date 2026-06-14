@@ -8,7 +8,7 @@ import { urlFor } from '@/sanity/lib/image'
 
 export const metadata: Metadata = {
   title: 'À propos',
-  description: "Découvrez l'association Agir Avec Vous Tous, ses valeurs et ses actions à Trinité-sur-Mer.",
+  description: "Découvrez l'association Unis Pour La Trinité Sur Mer, ses valeurs et ses actions à Trinité-sur-Mer.",
 }
 
 const values = [
@@ -140,7 +140,7 @@ export default function AProposPage() {
           </h2>
           <div className="mt-6 space-y-4 text-muted leading-relaxed text-sm">
             <p>
-              <strong className="text-text">Agir Avec Vous Tous</strong> est une association citoyenne fondée par des habitants de Trinité-sur-Mer, engagés dans la vie locale et désireux de contribuer activement au développement de leur commune.
+              <strong className="text-text">Unis Pour La Trinité Sur Mer</strong> est une association citoyenne fondée par des habitants de Trinité-sur-Mer, engagés dans la vie locale et désireux de contribuer activement au développement de leur commune.
             </p>
             <p>
               Notre démarche est fondée sur l'écoute, la participation et des propositions concrètes. Nous réunissons des femmes et des hommes de tous horizons, unis par leur attachement à ce territoire breton exceptionnel.
