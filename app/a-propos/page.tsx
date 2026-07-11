@@ -136,7 +136,7 @@ export default function AProposPage() {
         <div>
           <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-4">Notre association</p>
           <h2 className="font-display font-extrabold text-2xl sm:text-3xl text-text leading-tight">
-            Agir ensemble<br />pour Trinité-sur-Mer
+            Agir ensemble<br />pour la Trinité-sur-Mer
           </h2>
           <div className="mt-6 space-y-4 text-muted leading-relaxed text-sm">
             <p>
