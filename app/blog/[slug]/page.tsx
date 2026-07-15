@@ -3,11 +3,30 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { PortableText } from 'next-sanity'
+import { PortableText, type PortableTextComponents } from 'next-sanity'
 import { sanityFetch } from '@/sanity/lib/live'
 import { POST_QUERY, POST_SLUGS_QUERY, type PostQueryResult, type PostSlugsQueryResult } from '@/sanity/lib/queries'
 import { urlFor } from '@/sanity/lib/image'
 import { client } from '@/sanity/lib/client'
+
+const portableTextComponents: PortableTextComponents = {
+  types: {
+    image: ({ value }) => {
+      if (!value?.asset) return null
+      return (
+        <div className="my-6">
+          <Image
+            src={urlFor(value).width(800).auto('format').url()}
+            alt={value.alt || ''}
+            width={800}
+            height={450}
+            className="rounded-lg w-full object-cover"
+          />
+        </div>
+      )
+    },
+  },
+}
 
 export async function generateStaticParams() {
   const slugs = await client
@@ -123,7 +142,7 @@ async function PostContent({ slug }: { slug: string }) {
           prose-blockquote:border-l-accent-yellow prose-blockquote:text-muted prose-blockquote:not-italic
           prose-strong:text-text
           prose-code:text-primary prose-code:bg-primary/5 prose-code:px-1 prose-code:rounded">
-          <PortableText value={post.body} />
+          <PortableText value={post.body} components={portableTextComponents} />
         </div>
       )}
 
