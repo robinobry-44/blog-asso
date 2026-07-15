@@ -20,6 +20,14 @@ export const POSTS_QUERY = groq`
 
 export type PostsQueryResult = Post[]
 
+export const LATEST_POSTS_QUERY = groq`
+  *[_type == "post" && defined(slug.current)] | order(coalesce(publishedAt, _createdAt) desc)[0...4] {
+    ${postFields}
+  }
+`
+
+export type LatestPostsQueryResult = Post[]
+
 export const POSTS_BY_CATEGORY_QUERY = groq`
   *[_type == "post" && defined(slug.current) && $categorySlug in categories[]->slug.current] | order(publishedAt desc) {
     ${postFields}

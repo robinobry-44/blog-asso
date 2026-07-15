@@ -2,9 +2,9 @@ import { Suspense } from 'react'
 import Link from 'next/link'
 import { sanityFetch } from '@/sanity/lib/live'
 import {
-  POSTS_QUERY,
+  LATEST_POSTS_QUERY,
   CATEGORIES_QUERY,
-  type PostsQueryResult,
+  type LatestPostsQueryResult,
   type CategoriesQueryResult,
 } from '@/sanity/lib/queries'
 import CategoryFilter from './components/CategoryFilter'
@@ -48,10 +48,10 @@ function Hero() {
 async function LatestArticles() {
   'use cache'
   const [postsResult, categoriesResult] = await Promise.all([
-    sanityFetch({ query: POSTS_QUERY }),
+    sanityFetch({ query: LATEST_POSTS_QUERY }),
     sanityFetch({ query: CATEGORIES_QUERY }),
   ])
-  const posts = (postsResult.data ?? []) as PostsQueryResult
+  const posts = (postsResult.data ?? []) as LatestPostsQueryResult
   const categories = (categoriesResult.data ?? []) as CategoriesQueryResult
   if (posts.length === 0) return null
   return <CategoryFilter posts={posts} categories={categories} />
@@ -78,9 +78,9 @@ export default function Home() {
         </div>
 
         <Suspense fallback={
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {[1, 2, 3].map((i) => (
-              <div key={i} className="rounded-xl bg-surface border border-zinc-100 border-l-4 border-l-primary/20 aspect-[4/3] animate-pulse" />
+          <div className="grid gap-4 sm:grid-cols-2">
+            {[1, 2, 3, 4].map((i) => (
+              <div key={i} className="rounded-xl bg-surface border border-zinc-100 border-l-4 border-l-primary/20 h-64 animate-pulse" />
             ))}
           </div>
         }>
