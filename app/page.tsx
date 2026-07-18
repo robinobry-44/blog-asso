@@ -1,27 +1,53 @@
 import { Suspense } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { sanityFetch } from '@/sanity/lib/live'
 import { LATEST_POSTS_QUERY, type LatestPostsQueryResult } from '@/sanity/lib/queries'
 import ArticleCard from './components/ArticleCard'
 
+const HERO_IMAGE_URL =
+  'https://images.unsplash.com/photo-1657031960833-c13cee6c3064?w=1920&q=80&fit=crop&auto=format'
+
 function Hero() {
   return (
-    <section className="relative overflow-hidden bg-primary max-h-[350px]">
-      <div className="relative z-10 mx-auto max-w-6xl px-6 py-8 sm:py-10">
-        <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-white/60 mb-6">
+    <section
+      className="relative overflow-hidden h-[380px] max-h-[380px] flex items-center"
+      style={{
+        backgroundImage: `linear-gradient(rgba(27, 94, 166, 0.75), rgba(27, 94, 166, 0.85)), url('${HERO_IMAGE_URL}')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}
+    >
+      <div className="relative z-10 mx-auto max-w-3xl px-6 flex flex-col items-center text-center">
+        <Image
+          src="/logo.png"
+          alt="Unis pour la Trinité-sur-Mer"
+          width={200}
+          height={113}
+          style={{
+            height: '80px',
+            width: 'auto',
+            filter: 'drop-shadow(0 0 18px rgba(255,255,255,0.6)) drop-shadow(0 0 4px rgba(255,255,255,0.4))',
+          }}
+          className="mb-4"
+          priority
+        />
+
+        <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-white/70 mb-3">
           <span className="h-px w-6 bg-accent-yellow" />
           Trinité-sur-Mer, Morbihan
+          <span className="h-px w-6 bg-accent-yellow" />
         </span>
 
-        <h1 className="font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl text-white leading-tight tracking-tight max-w-2xl">
+        <h1 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-white leading-tight tracking-tight">
           Unis Pour La Trinité Sur Mer
         </h1>
 
-        <p className="mt-5 text-base sm:text-lg text-white/75 leading-relaxed max-w-xl">
+        <p className="mt-3 text-sm sm:text-base text-white/85 leading-relaxed max-w-lg">
           Une association citoyenne engagée pour le développement et la qualité de vie à Trinité-sur-Mer.
         </p>
 
-        <div className="mt-8 flex flex-wrap gap-3">
+        <div className="mt-5 flex flex-wrap justify-center gap-3">
           <Link
             href="/blog"
             className="bg-white text-primary font-semibold text-sm px-5 py-2.5 rounded-md hover:bg-white/90 transition-colors"
@@ -30,7 +56,7 @@ function Hero() {
           </Link>
           <Link
             href="/a-propos"
-            className="border border-white/30 text-white font-medium text-sm px-5 py-2.5 rounded-md hover:bg-white/10 transition-colors"
+            className="border border-white/40 text-white font-medium text-sm px-5 py-2.5 rounded-md hover:bg-white/10 transition-colors"
           >
             Qui sommes-nous ?
           </Link>
