@@ -10,7 +10,7 @@ import {
   type CategoriesQueryResult,
 } from '@/sanity/lib/queries'
 import ArticleCard from '../components/ArticleCard'
-import { getCategoryColor } from '../lib/categoryColors'
+import { getCategoryColor, hexToRgba, DEFAULT_CATEGORY_COLOR } from '../lib/categoryColors'
 
 export const metadata: Metadata = {
   title: 'Blog',
@@ -24,18 +24,17 @@ async function CategoryNav({ currentCategory }: { currentCategory?: string }) {
 
   if (categories.length === 0) return null
 
-  const pillBase = 'px-4 py-1.5 rounded-full text-sm font-semibold transition-colors border'
+  const pillBase = 'px-4 py-1.5 rounded-full text-sm font-semibold text-white transition-all'
   const isAllActive = !currentCategory
 
   return (
     <div className="flex flex-wrap gap-2 mt-6">
       <Link
         href="/blog"
-        className={`${pillBase} ${
-          isAllActive
-            ? 'bg-dark border-dark text-white'
-            : 'bg-white border-zinc-300 text-muted hover:border-zinc-400'
-        }`}
+        className={`${pillBase} ${isAllActive ? 'scale-105' : ''}`}
+        style={{
+          backgroundColor: isAllActive ? '#0D0D0D' : hexToRgba(DEFAULT_CATEGORY_COLOR, 0.7),
+        }}
       >
         Tous
       </Link>
@@ -48,12 +47,8 @@ async function CategoryNav({ currentCategory }: { currentCategory?: string }) {
           <Link
             key={cat._id}
             href={`/blog?category=${ref}`}
-            className={pillBase}
-            style={
-              isActive
-                ? { backgroundColor: color, borderColor: color, color: '#fff' }
-                : { backgroundColor: '#fff', borderColor: color, color }
-            }
+            className={`${pillBase} ${isActive ? 'scale-105' : ''}`}
+            style={{ backgroundColor: isActive ? color : hexToRgba(color, 0.7) }}
           >
             {cat.title}
           </Link>
