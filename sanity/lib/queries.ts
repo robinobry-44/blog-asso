@@ -29,7 +29,7 @@ export const LATEST_POSTS_QUERY = groq`
 export type LatestPostsQueryResult = Post[]
 
 export const POSTS_BY_CATEGORY_QUERY = groq`
-  *[_type == "post" && defined(slug.current) && $categorySlug in categories[]->slug.current] | order(publishedAt desc) {
+  *[_type == "post" && defined(slug.current) && ($categoryRef in categories[]->slug.current || $categoryRef in categories[]->_id)] | order(publishedAt desc) {
     ${postFields}
   }
 `

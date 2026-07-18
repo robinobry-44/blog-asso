@@ -10,6 +10,7 @@ import {
   type CategoriesQueryResult,
 } from '@/sanity/lib/queries'
 import ArticleCard from '../components/ArticleCard'
+import { getCategoryColor } from '../lib/categoryColors'
 
 export const metadata: Metadata = {
   title: 'Blog',
@@ -24,28 +25,40 @@ async function CategoryNav({ currentCategory }: { currentCategory?: string }) {
   if (categories.length === 0) return null
 
   const pillBase = 'px-4 py-1.5 rounded-full text-sm font-semibold transition-colors border'
-  const pillActive = 'bg-primary text-white border-primary'
-  const pillIdle = 'bg-surface border-zinc-200 text-muted hover:border-primary/40 hover:text-primary'
+  const isAllActive = !currentCategory
 
   return (
     <div className="flex flex-wrap gap-2 mt-6">
       <Link
         href="/blog"
-        className={`${pillBase} ${!currentCategory ? pillActive : pillIdle}`}
+        className={`${pillBase} ${
+          isAllActive
+            ? 'bg-dark border-dark text-white'
+            : 'bg-white border-zinc-300 text-muted hover:border-zinc-400'
+        }`}
       >
         Tous
       </Link>
-      {categories.map((cat) =>
-        cat.slug ? (
+      {categories.map((cat) => {
+        const ref = cat.slug ?? cat._id
+        const color = getCategoryColor(cat.slug)
+        const isActive = currentCategory === ref
+
+        return (
           <Link
             key={cat._id}
-            href={`/blog?category=${cat.slug}`}
-            className={`${pillBase} ${currentCategory === cat.slug ? pillActive : pillIdle}`}
+            href={`/blog?category=${ref}`}
+            className={pillBase}
+            style={
+              isActive
+                ? { backgroundColor: color, borderColor: color, color: '#fff' }
+                : { backgroundColor: '#fff', borderColor: color, color }
+            }
           >
             {cat.title}
           </Link>
-        ) : null
-      )}
+        )
+      })}
     </div>
   )
 }
@@ -55,7 +68,7 @@ async function PostList({ category }: { category?: string }) {
   const isFiltered = Boolean(category)
   const { data } = await sanityFetch({
     query: isFiltered ? POSTS_BY_CATEGORY_QUERY : POSTS_QUERY,
-    params: isFiltered ? { categorySlug: category } : {},
+    params: isFiltered ? { categoryRef: category } : {},
   })
   const posts = (data ?? []) as PostsQueryResult
 

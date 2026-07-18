@@ -19,8 +19,8 @@ export default function ArticleCard({ post, compact = false }: { post: Post; com
 
   return (
     <article
-      className="relative group flex flex-col bg-surface rounded-xl border border-zinc-100 border-l-4 hover:-translate-y-1 hover:shadow-lg transition-all duration-200 overflow-hidden"
-      style={{ borderLeftColor: categoryColor }}
+      className="relative group flex flex-col bg-surface rounded-xl border border-zinc-100 hover:-translate-y-1 hover:shadow-lg transition-all duration-200 overflow-hidden"
+      style={{ borderLeft: `4px solid ${categoryColor}` }}
     >
       {/* Image */}
       {post.mainImage ? (
