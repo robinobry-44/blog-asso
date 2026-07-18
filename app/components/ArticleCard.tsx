@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { urlFor } from '@/sanity/lib/image'
+import { getCategoryColor } from '@/app/lib/categoryColors'
 import type { Post } from '@/sanity/lib/types'
 
 function formatDate(dateString: string) {
@@ -13,10 +14,14 @@ function formatDate(dateString: string) {
 
 export default function ArticleCard({ post, compact = false }: { post: Post; compact?: boolean }) {
   const category = post.categories?.[0]
+  const categoryColor = getCategoryColor(category?.title)
   const imageHeight = compact ? 160 : 340
 
   return (
-    <article className="relative group flex flex-col bg-surface rounded-xl border border-zinc-100 border-l-4 border-l-primary hover:-translate-y-1 hover:shadow-lg transition-all duration-200 overflow-hidden">
+    <article
+      className="relative group flex flex-col bg-surface rounded-xl border border-zinc-100 border-l-4 hover:-translate-y-1 hover:shadow-lg transition-all duration-200 overflow-hidden"
+      style={{ borderLeftColor: categoryColor }}
+    >
       {/* Image */}
       {post.mainImage ? (
         <div className={`overflow-hidden bg-zinc-100 shrink-0 ${compact ? 'h-40' : 'aspect-video'}`}>
@@ -41,12 +46,16 @@ export default function ArticleCard({ post, compact = false }: { post: Post; com
             category.slug ? (
               <Link
                 href={`/blog?category=${category.slug}`}
-                className="relative z-10 text-xs font-semibold text-primary uppercase tracking-wider bg-primary/8 px-2 py-0.5 rounded hover:bg-primary/15 transition-colors"
+                className="relative z-10 text-xs font-semibold uppercase tracking-wider px-2 py-0.5 rounded hover:opacity-80 transition-opacity"
+                style={{ backgroundColor: `${categoryColor}1A`, color: categoryColor }}
               >
                 {category.title}
               </Link>
             ) : (
-              <span className="text-xs font-semibold text-primary uppercase tracking-wider bg-primary/8 px-2 py-0.5 rounded">
+              <span
+                className="text-xs font-semibold uppercase tracking-wider px-2 py-0.5 rounded"
+                style={{ backgroundColor: `${categoryColor}1A`, color: categoryColor }}
+              >
                 {category.title}
               </span>
             )
