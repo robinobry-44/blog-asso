@@ -217,12 +217,15 @@ export default function BlogPage({
     <main>
       {/* Hero banner */}
       <section
-        className="relative overflow-hidden h-[250px] max-h-[250px] flex items-center justify-center"
+        className="relative overflow-hidden h-[250px] max-h-[250px] flex flex-col items-center justify-center"
         style={heroBackgroundStyle}
       >
         <h1 className="font-syne font-bold text-white text-4xl sm:text-5xl text-center tracking-tight">
           Actualités
         </h1>
+        <p className="font-sans font-normal text-white opacity-90 text-lg text-center mt-2">
+          Tous nos articles
+        </p>
       </section>
 
       {/* Page header */}
@@ -233,7 +236,6 @@ export default function BlogPage({
             <span className="text-zinc-300">/</span>
             <span className="text-text">Blog</span>
           </nav>
-          <p className="text-muted text-sm">Les dernières nouvelles de l&apos;association</p>
 
           {/* Category filter pills — resolves searchParams inside Suspense */}
           <Suspense fallback={<div className="mt-6 h-9" />}>
