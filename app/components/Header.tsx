@@ -4,6 +4,9 @@ import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
+import { IconBrandFacebook } from '@tabler/icons-react'
+
+const FACEBOOK_URL = 'https://www.facebook.com/people/Unis-pour-la-Trinit%C3%A9-sur-Mer/61586182756588/'
 
 const navLinks = [
   { href: '/', label: 'Accueil' },
@@ -57,6 +60,17 @@ export default function Header() {
               </Link>
             ))}
           </nav>
+
+          {/* Facebook link */}
+          <a
+            href={FACEBOOK_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Suivez-nous sur Facebook"
+            className="shrink-0 text-[#1B5EA6] hover:opacity-70 transition-opacity"
+          >
+            <IconBrandFacebook size={20} color="#1B5EA6" />
+          </a>
 
           {/* Mobile toggle */}
           <button

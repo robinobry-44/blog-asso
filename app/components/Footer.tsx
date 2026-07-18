@@ -1,4 +1,7 @@
 import Link from 'next/link'
+import { IconBrandFacebook } from '@tabler/icons-react'
+
+const FACEBOOK_URL = 'https://www.facebook.com/people/Unis-pour-la-Trinit%C3%A9-sur-Mer/61586182756588/'
 
 export default function Footer() {
   return (
@@ -45,6 +48,15 @@ export default function Footer() {
             >
               Nous écrire
             </Link>
+            <a
+              href={FACEBOOK_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 flex items-center gap-2 text-sm text-white hover:opacity-70 transition-opacity"
+            >
+              <IconBrandFacebook size={22} color="#ffffff" />
+              Suivez-nous sur Facebook
+            </a>
           </div>
         </div>
 
