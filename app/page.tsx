@@ -4,19 +4,13 @@ import Image from 'next/image'
 import { sanityFetch } from '@/sanity/lib/live'
 import { LATEST_POSTS_QUERY, type LatestPostsQueryResult } from '@/sanity/lib/queries'
 import ArticleCard from './components/ArticleCard'
-
-const HERO_IMAGE_URL =
-  'https://images.unsplash.com/photo-1657031960833-c13cee6c3064?w=1920&q=80&fit=crop&auto=format'
+import { heroBackgroundStyle } from './lib/heroBackground'
 
 function Hero() {
   return (
     <section
       className="relative overflow-hidden h-[380px] max-h-[380px] flex items-center"
-      style={{
-        backgroundImage: `linear-gradient(rgba(27, 94, 166, 0.75), rgba(27, 94, 166, 0.85)), url('${HERO_IMAGE_URL}')`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-      }}
+      style={heroBackgroundStyle}
     >
       <div className="relative z-10 mx-auto max-w-3xl px-6 flex flex-col items-center text-center">
         <Image

@@ -15,6 +15,7 @@ import {
 } from '@/sanity/lib/queries'
 import ArticleCard from '../components/ArticleCard'
 import { getCategoryColor, hexToRgba } from '../lib/categoryColors'
+import { heroBackgroundStyle } from '../lib/heroBackground'
 
 const TOUS_INACTIVE_COLOR = '#888888'
 const PAGE_BLUE = '#1B5EA6'
@@ -214,19 +215,25 @@ export default function BlogPage({
 }) {
   return (
     <main>
+      {/* Hero banner */}
+      <section
+        className="relative overflow-hidden h-[250px] max-h-[250px] flex items-center justify-center"
+        style={heroBackgroundStyle}
+      >
+        <h1 className="font-syne font-bold text-white text-4xl sm:text-5xl text-center tracking-tight">
+          Actualités
+        </h1>
+      </section>
+
       {/* Page header */}
       <div className="bg-surface border-b border-zinc-200">
-        <div className="mx-auto max-w-6xl px-6 py-12">
-          <nav className="text-xs text-muted mb-4 flex items-center gap-1.5">
+        <div className="mx-auto max-w-6xl px-6 py-8">
+          <nav className="text-xs text-muted mb-3 flex items-center gap-1.5">
             <Link href="/" className="hover:text-primary transition-colors">Accueil</Link>
             <span className="text-zinc-300">/</span>
             <span className="text-text">Blog</span>
           </nav>
-          <h1 className="font-display font-extrabold text-3xl sm:text-4xl text-text flex items-center gap-3">
-            <span className="block h-8 w-1 bg-accent-yellow shrink-0" />
-            Actualités
-          </h1>
-          <p className="mt-2 text-muted text-sm ml-4">Les dernières nouvelles de l&apos;association</p>
+          <p className="text-muted text-sm">Les dernières nouvelles de l&apos;association</p>
 
           {/* Category filter pills — resolves searchParams inside Suspense */}
           <Suspense fallback={<div className="mt-6 h-9" />}>
