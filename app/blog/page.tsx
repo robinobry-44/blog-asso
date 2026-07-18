@@ -220,7 +220,7 @@ export default function BlogPage({
         className="relative overflow-hidden h-[250px] max-h-[250px] flex flex-col items-center justify-center"
         style={heroBackgroundStyle}
       >
-        <h1 className="font-syne font-bold text-white text-4xl sm:text-5xl text-center tracking-tight">
+        <h1 className="font-display font-extrabold text-white text-4xl sm:text-5xl text-center tracking-tight">
           Actualités
         </h1>
         <p className="font-sans font-normal text-white opacity-90 text-lg text-center mt-2">
