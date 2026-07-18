@@ -1,11 +1,11 @@
 const CATEGORY_COLORS: Record<string, string> = {
-  'compte-rendu': '#1B6BB5',
-  'courrier-a-la-mairie': '#9B59B6',
+  'compte-rendu': '#1B5EA6',
+  'courrier-a-la-mairie': '#3AAA8C',
   'revue-de-presse': '#F5C400',
   'vie-a-la-trinite': '#E63232',
 }
 
-export const DEFAULT_CATEGORY_COLOR = '#888888'
+export const DEFAULT_CATEGORY_COLOR = '#2AACB8'
 
 export function getCategoryColor(slug?: string | null): string {
   if (!slug) return DEFAULT_CATEGORY_COLOR

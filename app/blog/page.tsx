@@ -10,7 +10,9 @@ import {
   type CategoriesQueryResult,
 } from '@/sanity/lib/queries'
 import ArticleCard from '../components/ArticleCard'
-import { getCategoryColor, hexToRgba, DEFAULT_CATEGORY_COLOR } from '../lib/categoryColors'
+import { getCategoryColor, hexToRgba } from '../lib/categoryColors'
+
+const TOUS_INACTIVE_COLOR = '#888888'
 
 export const metadata: Metadata = {
   title: 'Blog',
@@ -33,7 +35,7 @@ async function CategoryNav({ currentCategory }: { currentCategory?: string }) {
         href="/blog"
         className={`${pillBase} ${isAllActive ? 'scale-105' : ''}`}
         style={{
-          backgroundColor: isAllActive ? '#0D0D0D' : hexToRgba(DEFAULT_CATEGORY_COLOR, 0.7),
+          backgroundColor: isAllActive ? '#0D0D0D' : hexToRgba(TOUS_INACTIVE_COLOR, 0.7),
         }}
       >
         Tous
