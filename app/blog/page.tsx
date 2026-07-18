@@ -217,7 +217,7 @@ export default function BlogPage({
     <main>
       {/* Hero banner */}
       <section
-        className="relative overflow-hidden h-[250px] max-h-[250px] flex flex-col items-center justify-center"
+        className="relative overflow-hidden h-[200px] max-h-[200px] flex flex-col items-center justify-center"
         style={heroBackgroundStyle}
       >
         <h1 className="font-display font-extrabold text-white text-4xl sm:text-5xl text-center tracking-tight">

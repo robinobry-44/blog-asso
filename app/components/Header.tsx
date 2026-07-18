@@ -40,9 +40,9 @@ export default function Header() {
             <Image
               src="/logo-icon.png"
               alt="Unis pour la Trinité-sur-Mer"
-              width={44}
-              height={44}
-              style={{ height: '44px', width: '44px' }}
+              width={64}
+              height={64}
+              style={{ height: '64px', width: '64px' }}
               className="shrink-0"
               priority
             />
