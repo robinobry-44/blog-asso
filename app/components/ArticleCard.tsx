@@ -14,7 +14,7 @@ function formatDate(dateString: string) {
 
 export default function ArticleCard({ post, compact = false }: { post: Post; compact?: boolean }) {
   const category = post.categories?.[0]
-  const categoryColor = getCategoryColor(category?.title)
+  const categoryColor = getCategoryColor(category?.slug)
   const imageHeight = compact ? 160 : 340
 
   return (

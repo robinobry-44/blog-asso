@@ -1,13 +1,8 @@
 import { Suspense } from 'react'
 import Link from 'next/link'
 import { sanityFetch } from '@/sanity/lib/live'
-import {
-  LATEST_POSTS_QUERY,
-  CATEGORIES_QUERY,
-  type LatestPostsQueryResult,
-  type CategoriesQueryResult,
-} from '@/sanity/lib/queries'
-import CategoryFilter from './components/CategoryFilter'
+import { LATEST_POSTS_QUERY, type LatestPostsQueryResult } from '@/sanity/lib/queries'
+import ArticleCard from './components/ArticleCard'
 
 function Hero() {
   return (
@@ -47,14 +42,16 @@ function Hero() {
 
 async function LatestArticles() {
   'use cache'
-  const [postsResult, categoriesResult] = await Promise.all([
-    sanityFetch({ query: LATEST_POSTS_QUERY }),
-    sanityFetch({ query: CATEGORIES_QUERY }),
-  ])
-  const posts = (postsResult.data ?? []) as LatestPostsQueryResult
-  const categories = (categoriesResult.data ?? []) as CategoriesQueryResult
+  const { data } = await sanityFetch({ query: LATEST_POSTS_QUERY })
+  const posts = (data ?? []) as LatestPostsQueryResult
   if (posts.length === 0) return null
-  return <CategoryFilter posts={posts} categories={categories} />
+  return (
+    <div className="grid gap-4 sm:grid-cols-2">
+      {posts.map((post) => (
+        <ArticleCard key={post._id} post={post} compact />
+      ))}
+    </div>
+  )
 }
 
 export default function Home() {
@@ -73,7 +70,7 @@ export default function Home() {
             href="/blog"
             className="hidden sm:inline-flex text-sm font-medium text-primary hover:text-primary-dark transition-colors"
           >
-            Tout voir →
+            Tous les articles →
           </Link>
         </div>
 
