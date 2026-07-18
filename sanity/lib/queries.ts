@@ -34,6 +34,30 @@ export const POSTS_BY_CATEGORY_QUERY = groq`
   }
 `
 
+export const PAGE_SIZE = 10
+
+export const PAGINATED_POSTS_QUERY = groq`
+  *[_type == "post" && defined(slug.current)] | order(coalesce(publishedAt, _createdAt) desc) [$offset...$offset + ${PAGE_SIZE}] {
+    ${postFields}
+  }
+`
+
+export const PAGINATED_POSTS_BY_CATEGORY_QUERY = groq`
+  *[_type == "post" && defined(slug.current) && ($categoryRef in categories[]->slug.current || $categoryRef in categories[]->_id)] | order(coalesce(publishedAt, _createdAt) desc) [$offset...$offset + ${PAGE_SIZE}] {
+    ${postFields}
+  }
+`
+
+export const POSTS_COUNT_QUERY = groq`
+  count(*[_type == "post" && defined(slug.current)])
+`
+
+export const POSTS_COUNT_BY_CATEGORY_QUERY = groq`
+  count(*[_type == "post" && defined(slug.current) && ($categoryRef in categories[]->slug.current || $categoryRef in categories[]->_id)])
+`
+
+export type PostsCountQueryResult = number
+
 export const POST_QUERY = groq`
   *[_type == "post" && slug.current == $slug][0] {
     ${postFields}
