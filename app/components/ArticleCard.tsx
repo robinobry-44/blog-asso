@@ -15,7 +15,7 @@ function formatDate(dateString: string) {
 export default function ArticleCard({ post, compact = false }: { post: Post; compact?: boolean }) {
   const category = post.categories?.[0]
   const categoryColor = getCategoryColor(category?.slug)
-  const imageHeight = compact ? 160 : 340
+  const imageHeight = 180
 
   return (
     <article
@@ -24,17 +24,17 @@ export default function ArticleCard({ post, compact = false }: { post: Post; com
     >
       {/* Image */}
       {post.mainImage ? (
-        <div className={`overflow-hidden bg-zinc-100 shrink-0 ${compact ? 'h-40' : 'aspect-video'}`}>
+        <div className="overflow-hidden bg-zinc-100 shrink-0 h-[180px]">
           <Image
             src={urlFor(post.mainImage).width(600).height(imageHeight).fit('crop').url()}
             alt={post.mainImage.alt ?? post.title ?? ''}
             width={600}
             height={imageHeight}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300"
           />
         </div>
       ) : (
-        <div className={`bg-gradient-to-br from-primary/10 to-bg flex items-center justify-center shrink-0 ${compact ? 'h-40' : 'aspect-video'}`}>
+        <div className="bg-gradient-to-br from-primary/10 to-bg flex items-center justify-center shrink-0 h-[180px]">
           <span className="font-display font-extrabold text-3xl text-primary/20">AAT</span>
         </div>
       )}

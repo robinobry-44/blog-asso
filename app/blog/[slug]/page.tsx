@@ -121,13 +121,13 @@ async function PostContent({ slug }: { slug: string }) {
 
       {/* Main image */}
       {post.mainImage && (
-        <div className="mt-8 overflow-hidden rounded-xl bg-zinc-100">
+        <div className="mt-8 relative w-full h-[450px] max-h-[450px] rounded-xl bg-zinc-50 overflow-hidden">
           <Image
-            src={urlFor(post.mainImage).width(1200).height(630).fit('crop').url()}
+            src={urlFor(post.mainImage).width(1600).fit('max').auto('format').url()}
             alt={post.mainImage.alt ?? post.title ?? ''}
-            width={1200}
-            height={630}
-            className="w-full object-cover"
+            fill
+            sizes="(max-width: 768px) 100vw, 768px"
+            className="object-contain"
             priority
           />
         </div>
