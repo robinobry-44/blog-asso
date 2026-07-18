@@ -21,22 +21,21 @@ export default function Header() {
   }
 
   return (
-    <header className="sticky top-0 z-50 bg-[#1B5EA6]">
+    <header className="sticky top-0 z-50 bg-white border-b border-[#E5E7EB]">
       <div className="mx-auto max-w-6xl px-6">
         <div className="flex h-20 items-center justify-between gap-4">
           {/* Logo + title */}
           <Link href="/" className="flex items-center gap-3 shrink-0 min-w-0">
-            <div className="bg-white rounded-lg px-2 py-1 shrink-0">
-              <Image
-                src="/logo.png"
-                alt="Unis pour la Trinité-sur-Mer"
-                width={140}
-                height={79}
-                style={{ height: '48px', width: 'auto' }}
-                priority
-              />
-            </div>
-            <span className="font-syne font-extrabold text-white whitespace-nowrap leading-none text-sm min-[380px]:text-base min-[480px]:text-lg sm:text-2xl">
+            <Image
+              src="/logo-icon.png"
+              alt="Unis pour la Trinité-sur-Mer"
+              width={44}
+              height={44}
+              style={{ height: '44px', width: '44px' }}
+              className="shrink-0"
+              priority
+            />
+            <span className="font-sans font-semibold text-[#1B5EA6] whitespace-nowrap leading-none text-sm">
               Unis Pour La Trinité Sur Mer
             </span>
           </Link>
@@ -47,15 +46,13 @@ export default function Header() {
               <Link
                 key={href}
                 href={href}
-                className={`px-4 py-2 text-sm font-medium transition-colors ${
-                  isActive(href)
-                    ? 'text-white'
-                    : 'text-white/70 hover:text-white'
+                className={`px-4 py-2 text-sm font-medium transition-colors text-[#1B5EA6] ${
+                  isActive(href) ? '' : 'opacity-70 hover:opacity-100'
                 }`}
               >
                 {label}
                 {isActive(href) && (
-                  <span className="block h-0.5 bg-white mt-0.5 -mb-0.5" />
+                  <span className="block h-0.5 bg-[#1B5EA6] mt-0.5 -mb-0.5" />
                 )}
               </Link>
             ))}
@@ -63,7 +60,7 @@ export default function Header() {
 
           {/* Mobile toggle */}
           <button
-            className="md:hidden p-2 text-white/80 hover:text-white transition-colors shrink-0"
+            className="md:hidden p-2 text-[#1B5EA6] opacity-80 hover:opacity-100 transition-opacity shrink-0"
             onClick={() => setOpen((v) => !v)}
             aria-label={open ? 'Fermer le menu' : 'Ouvrir le menu'}
             aria-expanded={open}
@@ -83,14 +80,14 @@ export default function Header() {
 
       {/* Mobile nav */}
       {open && (
-        <nav className="md:hidden border-t border-white/10 bg-[#1B5EA6]">
+        <nav className="md:hidden border-t border-[#E5E7EB] bg-white">
           {navLinks.map(({ href, label }) => (
             <Link
               key={href}
               href={href}
               onClick={() => setOpen(false)}
-              className={`block px-6 py-3 text-sm font-medium border-b border-white/10 transition-colors ${
-                isActive(href) ? 'text-white bg-white/10' : 'text-white/70 hover:text-white'
+              className={`block px-6 py-3 text-sm font-medium border-b border-[#E5E7EB] text-[#1B5EA6] transition-opacity ${
+                isActive(href) ? 'bg-[#1B5EA6]/5' : 'opacity-70 hover:opacity-100'
               }`}
             >
               {label}

@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 export default function Footer() {
   return (
-    <footer className="bg-dark text-white">
+    <footer className="bg-[#1B5EA6] text-white">
       <div className="mx-auto max-w-6xl px-6 pt-16 pb-10">
         {/* Large asso name */}
         <p className="font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl text-white leading-none mb-2">
@@ -41,7 +41,7 @@ export default function Footer() {
             <p className="text-xs font-semibold uppercase tracking-widest text-white/30 mb-4">Contact</p>
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 bg-primary text-white text-sm font-semibold px-4 py-2 rounded-md hover:bg-primary-dark transition-colors"
+              className="inline-flex items-center gap-2 bg-white text-[#1B5EA6] text-sm font-semibold px-4 py-2 rounded-md hover:bg-white/90 transition-colors"
             >
               Nous écrire
             </Link>

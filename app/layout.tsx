@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Plus_Jakarta_Sans, Inter, Syne } from 'next/font/google'
+import { Plus_Jakarta_Sans, Inter } from 'next/font/google'
 import './globals.css'
 import { SanityLive } from '@/sanity/lib/live'
 import Header from './components/Header'
@@ -17,12 +17,6 @@ const inter = Inter({
   weight: ['400', '500', '600'],
 })
 
-const syne = Syne({
-  variable: '--font-syne-google',
-  subsets: ['latin'],
-  weight: ['700', '800'],
-})
-
 export const metadata: Metadata = {
   title: {
     template: '%s — Unis Pour La Trinité Sur Mer',
@@ -37,7 +31,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="fr" className={`${plusJakarta.variable} ${inter.variable} ${syne.variable}`}>
+    <html lang="fr" className={`${plusJakarta.variable} ${inter.variable}`}>
       <body className="min-h-screen flex flex-col font-sans antialiased bg-bg text-text">
         <Header />
         <div className="flex-1">{children}</div>
