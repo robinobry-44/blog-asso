@@ -2,6 +2,16 @@ import { Suspense } from 'react'
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
+import {
+  IconSchool,
+  IconBuilding,
+  IconChartBar,
+  IconTools,
+  IconSpeakerphone,
+  IconLeaf,
+  IconCoin,
+  IconStar,
+} from '@tabler/icons-react'
 import { client } from '@/sanity/lib/client'
 import { MEMBERS_QUERY, type MembersQueryResult } from '@/sanity/lib/queries'
 import { urlFor } from '@/sanity/lib/image'
@@ -49,6 +59,17 @@ function getInitials(name: string) {
     .toUpperCase()
 }
 
+function getCommissionIcon(text: string) {
+  if (text.match(/école|santé|social|ccas/i)) return IconSchool
+  if (text.match(/urbanisme/i)) return IconBuilding
+  if (text.match(/économie|commerce/i)) return IconChartBar
+  if (text.match(/association|travaux/i)) return IconTools
+  if (text.match(/communication|démocrati/i)) return IconSpeakerphone
+  if (text.match(/environnement|durable/i)) return IconLeaf
+  if (text.match(/finance/i)) return IconCoin
+  return IconStar
+}
+
 async function TeamSection() {
   const data = await client.fetch(MEMBERS_QUERY)
   const members = (data ?? []) as MembersQueryResult
@@ -70,7 +91,7 @@ async function TeamSection() {
         L&apos;équipe
       </h2>
 
-      <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 items-start">
         {sortedMembers.map((member, i) => {
           const color = avatarColors[i % avatarColors.length]
           const photoUrl = member.photo
@@ -107,9 +128,21 @@ async function TeamSection() {
                 </p>
               )}
               {member.bio && (
-                <p className="mt-2 text-sm text-muted leading-relaxed line-clamp-2">
-                  {member.bio}
-                </p>
+                <div className="mt-2 space-y-1.5 text-left">
+                  {member.bio
+                    .split('\n')
+                    .map((line) => line.trim())
+                    .filter(Boolean)
+                    .map((line, idx) => {
+                      const Icon = getCommissionIcon(line)
+                      return (
+                        <p key={idx} className="flex items-start gap-1.5 text-sm text-muted leading-relaxed">
+                          <Icon size={14} color="#1B5EA6" className="shrink-0 mt-1" />
+                          <span>{line}</span>
+                        </p>
+                      )
+                    })}
+                </div>
               )}
             </div>
           )
