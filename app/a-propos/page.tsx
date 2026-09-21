@@ -55,44 +55,32 @@ async function TeamSection() {
 
   if (members.length === 0) return null
 
+  const priority = ['Michèle Aubry', 'Nathalie Laureau']
+  const sortedMembers = [
+    ...members
+      .filter((m) => m.name && priority.includes(m.name))
+      .sort((a, b) => priority.indexOf(a.name as string) - priority.indexOf(b.name as string)),
+    ...members.filter((m) => !m.name || !priority.includes(m.name)),
+  ]
+
   return (
-    <section className="mx-auto max-w-6xl px-6 py-16">
+    <section className="mx-auto max-w-6xl px-6 pt-6 pb-16">
       <h2 className="font-display font-extrabold text-2xl sm:text-3xl text-text flex items-center gap-3 mb-10">
         <span className="block h-7 w-1 bg-accent-yellow shrink-0" />
         L&apos;équipe
       </h2>
 
-      {/* Élus */}
-      <div className="mb-10 bg-surface rounded-xl border border-zinc-100 border-l-4 border-l-[#1B5EA6] p-6">
-        <p className="font-display font-extrabold text-base text-text mb-4">Vos élus dans les commissions municipales</p>
-        <ul className="grid gap-x-8 gap-y-2.5 sm:grid-cols-2 text-sm text-muted leading-relaxed">
-          {[
-            { role: 'Écoles, maison de santé, lien social, CCAS', names: 'Michèle Aubry' },
-            { role: 'Urbanisme', names: 'Nathalie Laureau et Benoît Massiet du Biest' },
-            { role: 'Économie locale', names: 'Benoît Massiet du Biest' },
-            { role: 'Associations, travaux', names: 'Pierre Le Borgne' },
-            { role: 'Communication, participation démocratique', names: 'Nathalie Laureau' },
-            { role: 'Environnement, développement durable', names: 'Nathalie Laureau et Michèle Aubry' },
-            { role: 'Finances', names: 'Michèle Aubry' },
-          ].map(({ role, names }) => (
-            <li key={role}>
-              <span className="text-text font-semibold">{role}</span> : {names}
-            </li>
-          ))}
-        </ul>
-      </div>
-
       <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
-        {members.map((member, i) => {
+        {sortedMembers.map((member, i) => {
           const color = avatarColors[i % avatarColors.length]
           const photoUrl = member.photo
-            ? urlFor(member.photo).width(240).height(240).fit('crop').auto('format').url()
+            ? urlFor(member.photo).width(320).height(320).fit('crop').auto('format').url()
             : null
 
           return (
             <div key={member._id} className="flex flex-col items-center text-center group p-4">
               {/* Photo or initials */}
-              <div className="mb-4 relative w-[120px] h-[120px] shrink-0">
+              <div className="mb-4 relative w-40 h-40 shrink-0">
                 {photoUrl ? (
                   <Image
                     src={photoUrl}
@@ -102,7 +90,7 @@ async function TeamSection() {
                   />
                 ) : (
                   <div className={`w-full h-full rounded-full flex items-center justify-center ${color.bg}`}>
-                    <span className={`font-display font-extrabold text-2xl ${color.text}`}>
+                    <span className={`font-display font-extrabold text-3xl ${color.text}`}>
                       {member.name ? getInitials(member.name) : '?'}
                     </span>
                   </div>
@@ -151,7 +139,7 @@ export default function AProposPage() {
       </div>
 
       {/* Intro */}
-      <section className="mx-auto max-w-6xl px-6 py-16">
+      <section className="mx-auto max-w-6xl px-6 pt-16 pb-6">
         <div>
           <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-4">Notre association</p>
           <h2 className="font-display font-extrabold text-2xl sm:text-3xl text-text leading-tight">
@@ -172,20 +160,19 @@ export default function AProposPage() {
             href="/contact"
             className="mt-8 inline-flex bg-primary text-white font-semibold text-sm px-5 py-2.5 rounded-md hover:bg-primary-dark transition-colors"
           >
-            Rejoindre l'association
+            Rejoindre l&apos;association
           </Link>
         </div>
       </section>
 
       {/* Team */}
       <Suspense fallback={
-        <div className="mx-auto max-w-6xl px-6 py-16">
+        <div className="mx-auto max-w-6xl px-6 pt-6 pb-16">
           <div className="h-8 w-40 bg-zinc-100 rounded mb-10 animate-pulse" />
-          <div className="mb-10 h-40 bg-zinc-100 rounded-xl animate-pulse" />
           <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
             {[1, 2, 3, 4].map((i) => (
               <div key={i} className="flex flex-col items-center gap-3">
-                <div className="w-[120px] h-[120px] rounded-full bg-zinc-100 animate-pulse" />
+                <div className="w-40 h-40 rounded-full bg-zinc-100 animate-pulse" />
                 <div className="h-4 w-28 bg-zinc-100 rounded animate-pulse" />
                 <div className="h-3 w-20 bg-zinc-100 rounded animate-pulse" />
               </div>
