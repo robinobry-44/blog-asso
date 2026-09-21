@@ -48,20 +48,21 @@ export default function ContactPage() {
               },
               {
                 label: 'Email',
-                content: 'contact@agir-avec-vous-tous.fr',
-                note: 'À personnaliser',
+                content: 'unispourlatrinitesurmer@gmail.com',
+                href: 'mailto:unispourlatrinitesurmer@gmail.com',
               },
-              {
-                label: 'Délai de réponse',
-                content: 'Nous répondons sous 48 h ouvrées',
-              },
-            ].map(({ label, content, note }) => (
+            ].map(({ label, content, href }) => (
               <div key={label} className="flex gap-4">
                 <span className="shrink-0 mt-0.5 h-2 w-2 rounded-full bg-primary mt-1.5" />
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-wider text-muted mb-1">{label}</p>
-                  <p className="text-sm text-text whitespace-pre-line">{content}</p>
-                  {note && <p className="text-xs text-muted/60 italic mt-0.5">{note}</p>}
+                  {href ? (
+                    <a href={href} className="text-sm text-text hover:text-primary transition-colors whitespace-pre-line">
+                      {content}
+                    </a>
+                  ) : (
+                    <p className="text-sm text-text whitespace-pre-line">{content}</p>
+                  )}
                 </div>
               </div>
             ))}
