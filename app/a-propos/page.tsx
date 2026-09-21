@@ -2,7 +2,7 @@ import { Suspense } from 'react'
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import { sanityFetch } from '@/sanity/lib/live'
+import { client } from '@/sanity/lib/client'
 import { MEMBERS_QUERY, type MembersQueryResult } from '@/sanity/lib/queries'
 import { urlFor } from '@/sanity/lib/image'
 
@@ -50,8 +50,7 @@ function getInitials(name: string) {
 }
 
 async function TeamSection() {
-  'use cache'
-  const { data } = await sanityFetch({ query: MEMBERS_QUERY })
+  const data = await client.fetch(MEMBERS_QUERY)
   const members = (data ?? []) as MembersQueryResult
 
   if (members.length === 0) return null
