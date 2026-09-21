@@ -13,23 +13,23 @@ export const metadata: Metadata = {
 
 const values = [
   {
-    title: 'Citoyenneté',
-    desc: "Nous croyons en l'engagement de chacun pour construire une commune dynamique et solidaire.",
+    title: 'Écouter les habitants',
+    desc: "Les grandes décisions qui engagent l'avenir de la commune ne peuvent pas se construire sans les Trinitains. Elles doivent être expliquées, discutées et construites avec ceux qui vivent ici.",
     color: 'bg-primary/10 text-primary',
   },
   {
-    title: 'Territoire',
-    desc: "Trinité-sur-Mer est notre ancrage. Nous oeuvrons pour son développement durable et sa qualité de vie.",
+    title: 'Gérer avec responsabilité',
+    desc: "L'argent public appartient aux habitants. Les choix financiers doivent être maîtrisés, compréhensibles et transparents. Informer sur les dépenses n'est pas une contrainte : c'est une exigence démocratique.",
     color: 'bg-accent-yellow/20 text-dark',
   },
   {
-    title: 'Dialogue',
-    desc: "Nous favorisons l'échange ouvert entre les habitants, les élus et les acteurs locaux.",
+    title: "Préparer l'avenir",
+    desc: "La Trinité-sur-Mer possède un patrimoine naturel, maritime, culturel et humain exceptionnel. Nous voulons le préserver tout en permettant à la commune de rester vivante et attractive toute l'année.",
     color: 'bg-primary/10 text-primary',
   },
   {
-    title: 'Transparence',
-    desc: "Nos actions, décisions et comptes sont ouverts à tous les membres et sympathisants.",
+    title: 'Porter la voix des Trinitains',
+    desc: "De nombreuses décisions qui influencent notre quotidien (eau, déchets, transports…) sont prises à l'intercommunalité. Nous voulons les rendre plus lisibles et rendre compte de ce qui s'y décide.",
     color: 'bg-accent-yellow/20 text-dark',
   },
 ]
@@ -125,9 +125,9 @@ export default function AProposPage() {
           </nav>
           <h1 className="font-display font-extrabold text-3xl sm:text-4xl text-text flex items-center gap-3">
             <span className="block h-8 w-1 bg-accent-yellow shrink-0" />
-            À propos
+            Unis pour La Trinité-sur-Mer
           </h1>
-          <p className="mt-2 text-sm text-muted ml-4">Qui sommes-nous et que défendons-nous ?</p>
+          <p className="mt-2 text-sm text-muted ml-4">Une démarche citoyenne pour l&apos;avenir de notre commune</p>
         </div>
       </div>
 
@@ -140,13 +140,13 @@ export default function AProposPage() {
           </h2>
           <div className="mt-6 space-y-4 text-muted leading-relaxed text-sm">
             <p>
-              <strong className="text-text">Unis Pour La Trinité Sur Mer</strong> est une association citoyenne fondée par des habitants de Trinité-sur-Mer, engagés dans la vie locale et désireux de contribuer activement au développement de leur commune.
+              Nous avons fait campagne ensemble. Nous avons rencontré beaucoup d&apos;entre vous. Nous avons écouté, échangé, parfois débattu. Et, au fil de ces rencontres, une conviction s&apos;est imposée : nous avions envie de continuer.
             </p>
             <p>
-              Notre démarche est fondée sur l'écoute, la participation et des propositions concrètes. Nous réunissons des femmes et des hommes de tous horizons, unis par leur attachement à ce territoire breton exceptionnel.
+              Les élections municipales sont désormais derrière nous. Mais les questions que nous avons partagées pendant la campagne sont toujours là : quel avenir voulons-nous pour La Trinité-sur-Mer ? Comment permettre à celles et ceux qui y vivent à l&apos;année d&apos;y rester ? Comment préserver notre littoral, notre patrimoine et notre cadre de vie ?
             </p>
             <p>
-              Que vous soyez résident permanent ou saisonnier, nous vous invitons à rejoindre nos échanges et initiatives.
+              Les 45 % des suffrages exprimés qui nous ont été accordés au second tour constituent une marque de confiance. Ils nous donnent aussi une responsabilité : continuer à être présents, à suivre les dossiers, à poser les questions qui doivent l&apos;être.
             </p>
           </div>
           <Link
@@ -157,20 +157,24 @@ export default function AProposPage() {
           </Link>
         </div>
 
-        {/* Stats */}
-        <div className="grid grid-cols-2 gap-4">
-          {[
-            { value: '2022', label: 'Année de création' },
-            { value: '150+', label: 'Membres actifs' },
-            { value: '12', label: 'Événements par an' },
-            { value: '56470', label: 'Code postal' },
-          ].map(({ value, label }) => (
-            <div key={label} className="bg-surface rounded-xl border border-zinc-100 border-l-4 border-l-primary p-6">
-              <p className="font-display font-extrabold text-3xl text-text">{value}</p>
-              <p className="mt-1 text-xs text-muted">{label}</p>
-            </div>
-          ))}
-          <p className="col-span-2 text-xs text-muted/50 text-center italic mt-1">Données indicatives — à personnaliser</p>
+        {/* Élus */}
+        <div className="bg-surface rounded-xl border border-zinc-100 border-l-4 border-l-primary p-6">
+          <p className="font-display font-extrabold text-base text-text mb-4">Vos élus dans les commissions municipales</p>
+          <ul className="space-y-2.5 text-sm text-muted leading-relaxed">
+            {[
+              { role: 'Écoles, maison de santé, lien social, CCAS', names: 'Michèle Aubry' },
+              { role: 'Urbanisme', names: 'Nathalie Laureau et Benoît Massiet du Biest' },
+              { role: 'Économie locale', names: 'Benoît Massiet du Biest' },
+              { role: 'Associations, travaux', names: 'Pierre Le Borgne' },
+              { role: 'Communication, participation démocratique', names: 'Nathalie Laureau' },
+              { role: 'Environnement, développement durable', names: 'Nathalie Laureau et Michèle Aubry' },
+              { role: 'Finances', names: 'Michèle Aubry' },
+            ].map(({ role, names }) => (
+              <li key={role}>
+                <span className="text-text font-semibold">{role}</span> : {names}
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
@@ -215,17 +219,20 @@ export default function AProposPage() {
       {/* CTA */}
       <section className="bg-surface border-t border-zinc-200">
         <div className="mx-auto max-w-6xl px-6 py-16 text-center">
-          <h2 className="font-display font-extrabold text-2xl text-text">Une question ? Venez nous rencontrer.</h2>
+          <h2 className="font-display font-extrabold text-2xl text-text">Une question, un avis, une idée, un projet ?</h2>
           <p className="mt-3 text-sm text-muted max-w-md mx-auto">
-            Nos réunions sont ouvertes à tous. Suivez nos actualités ou contactez-nous directement.
+            Parlons-en. Nous sommes à votre écoute.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Link href="/contact" className="bg-primary text-white font-semibold text-sm px-5 py-2.5 rounded-md hover:bg-primary-dark transition-colors">
-              Nous contacter
+              Écrire à l&apos;association
             </Link>
             <Link href="/blog" className="border border-zinc-300 text-text font-medium text-sm px-5 py-2.5 rounded-md hover:border-primary/40 hover:text-primary transition-colors">
               Lire le blog
             </Link>
+            <a href="mailto:unispourlatrinitesurmer@gmail.com" className="border border-zinc-300 text-text font-medium text-sm px-5 py-2.5 rounded-md hover:border-primary/40 hover:text-primary transition-colors">
+              unispourlatrinitesurmer@gmail.com
+            </a>
           </div>
         </div>
       </section>
