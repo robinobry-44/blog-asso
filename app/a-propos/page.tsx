@@ -62,17 +62,17 @@ async function TeamSection() {
         L&apos;équipe
       </h2>
 
-      <div className="grid gap-8 grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
         {members.map((member, i) => {
           const color = avatarColors[i % avatarColors.length]
           const photoUrl = member.photo
-            ? urlFor(member.photo).width(200).height(200).fit('crop').auto('format').url()
+            ? urlFor(member.photo).width(160).height(160).fit('crop').auto('format').url()
             : null
 
           return (
             <div key={member._id} className="flex flex-col items-center text-center group">
               {/* Photo or initials */}
-              <div className="mb-4 relative w-24 h-24 shrink-0">
+              <div className="mb-4 relative w-20 h-20 shrink-0">
                 {photoUrl ? (
                   <Image
                     src={photoUrl}
@@ -82,7 +82,7 @@ async function TeamSection() {
                   />
                 ) : (
                   <div className={`w-full h-full rounded-full flex items-center justify-center ${color.bg}`}>
-                    <span className={`font-display font-extrabold text-xl ${color.text}`}>
+                    <span className={`font-display font-extrabold text-lg ${color.text}`}>
                       {member.name ? getInitials(member.name) : '?'}
                     </span>
                   </div>
@@ -90,16 +90,16 @@ async function TeamSection() {
               </div>
 
               {/* Info */}
-              <p className="font-display font-extrabold text-base text-text leading-snug">
+              <p className="font-display font-bold text-sm text-text leading-snug">
                 {member.name}
               </p>
               {member.role && (
-                <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-primary">
+                <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-muted">
                   {member.role}
                 </p>
               )}
               {member.bio && (
-                <p className="mt-2 text-sm text-muted leading-relaxed line-clamp-3">
+                <p className="mt-2 text-sm text-muted leading-relaxed line-clamp-2">
                   {member.bio}
                 </p>
               )}
@@ -131,7 +131,7 @@ export default function AProposPage() {
       </div>
 
       {/* Intro */}
-      <section className="mx-auto max-w-6xl px-6 py-16 grid gap-12 lg:grid-cols-2 lg:items-start">
+      <section className="mx-auto max-w-6xl px-6 py-16">
         <div>
           <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-4">Notre association</p>
           <h2 className="font-display font-extrabold text-2xl sm:text-3xl text-text leading-tight">
@@ -157,9 +157,9 @@ export default function AProposPage() {
         </div>
 
         {/* Élus */}
-        <div className="bg-surface rounded-xl border border-zinc-100 border-l-4 border-l-primary p-6">
+        <div className="mt-12 bg-surface rounded-xl border border-zinc-100 border-l-4 border-l-primary p-6">
           <p className="font-display font-extrabold text-base text-text mb-4">Vos élus dans les commissions municipales</p>
-          <ul className="space-y-2.5 text-sm text-muted leading-relaxed">
+          <ul className="grid gap-x-8 gap-y-2.5 sm:grid-cols-2 text-sm text-muted leading-relaxed">
             {[
               { role: 'Écoles, maison de santé, lien social, CCAS', names: 'Michèle Aubry' },
               { role: 'Urbanisme', names: 'Nathalie Laureau et Benoît Massiet du Biest' },
@@ -186,11 +186,11 @@ export default function AProposPage() {
           </h2>
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {values.map(({ title, desc, color }) => (
-              <div key={title} className="bg-bg rounded-xl border border-zinc-100 p-6 hover:border-primary/30 hover:shadow-sm transition-all">
-                <span className={`inline-block text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded mb-3 ${color}`}>
+              <div key={title} className="h-full flex flex-col bg-bg rounded-xl border border-zinc-100 p-6 hover:border-primary/30 hover:shadow-sm transition-all">
+                <span className={`inline-flex items-center min-h-[2.5rem] text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded mb-3 ${color}`}>
                   {title}
                 </span>
-                <p className="text-sm text-muted leading-relaxed">{desc}</p>
+                <p className="flex-1 text-sm text-muted leading-relaxed">{desc}</p>
               </div>
             ))}
           </div>
@@ -201,10 +201,10 @@ export default function AProposPage() {
       <Suspense fallback={
         <div className="mx-auto max-w-6xl px-6 py-16">
           <div className="h-8 w-40 bg-zinc-100 rounded mb-10 animate-pulse" />
-          <div className="grid gap-8 grid-cols-2 lg:grid-cols-3">
-            {[1, 2, 3].map((i) => (
+          <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+            {[1, 2, 3, 4].map((i) => (
               <div key={i} className="flex flex-col items-center gap-3">
-                <div className="w-24 h-24 rounded-full bg-zinc-100 animate-pulse" />
+                <div className="w-20 h-20 rounded-full bg-zinc-100 animate-pulse" />
                 <div className="h-4 w-28 bg-zinc-100 rounded animate-pulse" />
                 <div className="h-3 w-20 bg-zinc-100 rounded animate-pulse" />
               </div>
