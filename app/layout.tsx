@@ -22,7 +22,6 @@ export const metadata: Metadata = {
     template: '%s — Unis Pour La Trinité Sur Mer',
     default: 'Unis Pour La Trinité Sur Mer',
   },
-  description: "Association citoyenne engagée pour le développement et le bien-être de la commune de Trinité-sur-Mer.",
   icons: {
     icon: '/favicon.png',
     apple: '/favicon.png',

@@ -33,7 +33,6 @@ export default function Footer() {
           </div>
 
           <div>
-            <p className="text-xs font-semibold uppercase tracking-widest text-white/30 mb-4">Association</p>
             <address className="not-italic text-sm text-white/60 space-y-2">
               <p>Trinité-sur-Mer, 56470</p>
               <p>Morbihan, Bretagne</p>

@@ -86,13 +86,6 @@ export default function ContactPage() {
               </div>
             ))}
           </div>
-
-          <div className="mt-10 bg-primary/5 border border-primary/15 rounded-xl p-5">
-            <p className="text-sm font-semibold text-primary mb-1">Devenir membre</p>
-            <p className="text-sm text-muted leading-relaxed">
-              Précisez-le dans votre message et nous vous enverrons les informations d&apos;adhésion.
-            </p>
-          </div>
         </div>
 
         {/* Right — form */}

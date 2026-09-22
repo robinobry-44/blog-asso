@@ -18,7 +18,7 @@ import { urlFor } from '@/sanity/lib/image'
 
 export const metadata: Metadata = {
   title: 'À propos',
-  description: "Découvrez l'association Unis Pour La Trinité Sur Mer, ses valeurs et ses actions à Trinité-sur-Mer.",
+  description: "Découvrez Unis Pour La Trinité Sur Mer, ses valeurs et ses actions à Trinité-sur-Mer.",
 }
 
 const values = [
@@ -174,7 +174,6 @@ export default function AProposPage() {
       {/* Intro */}
       <section className="mx-auto max-w-6xl px-6 pt-16 pb-6">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-4">Notre association</p>
           <h2 className="font-display font-extrabold text-2xl sm:text-3xl text-text leading-tight sm:whitespace-nowrap">
             Agir ensemble pour la Trinité-sur-Mer
           </h2>
@@ -189,12 +188,6 @@ export default function AProposPage() {
               Les 45 % des suffrages exprimés qui nous ont été accordés au second tour constituent une marque de confiance. Ils nous donnent aussi une responsabilité : continuer à être présents, à suivre les dossiers, à poser les questions qui doivent l&apos;être.
             </p>
           </div>
-          <Link
-            href="/contact"
-            className="mt-8 inline-flex bg-primary text-white font-semibold text-sm px-5 py-2.5 rounded-md hover:bg-primary-dark transition-colors"
-          >
-            Rejoindre l&apos;association
-          </Link>
         </div>
       </section>
 
@@ -245,7 +238,7 @@ export default function AProposPage() {
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Link href="/contact" className="bg-primary text-white font-semibold text-sm px-5 py-2.5 rounded-md hover:bg-primary-dark transition-colors">
-              Écrire à l&apos;association
+              Écrire
             </Link>
             <Link href="/blog" className="border border-zinc-300 text-text font-medium text-sm px-5 py-2.5 rounded-md hover:border-primary/40 hover:text-primary transition-colors">
               Lire le blog

@@ -37,10 +37,6 @@ function Hero() {
           Unis Pour La Trinité Sur Mer
         </h1>
 
-        <p className="mt-3 text-sm sm:text-base text-white/85 leading-relaxed max-w-lg">
-          Une association citoyenne engagée pour le développement et la qualité de vie à Trinité-sur-Mer.
-        </p>
-
         <div className="mt-5 flex flex-wrap justify-center gap-3">
           <Link
             href="/blog"
@@ -110,22 +106,6 @@ export default function Home() {
             className="inline-flex text-sm font-semibold text-primary border border-primary px-5 py-2.5 rounded-md hover:bg-primary/5 transition-colors"
           >
             Voir toutes les actualités
-          </Link>
-        </div>
-      </section>
-
-      {/* CTA strip */}
-      <section className="border-t border-zinc-200 bg-surface">
-        <div className="mx-auto max-w-6xl px-6 py-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5">
-          <div>
-            <p className="font-display font-extrabold text-lg text-text">Rejoignez le mouvement</p>
-            <p className="mt-1 text-sm text-muted">Participez à la vie locale et agissez avec nous.</p>
-          </div>
-          <Link
-            href="/contact"
-            className="shrink-0 bg-primary text-white font-semibold text-sm px-5 py-2.5 rounded-md hover:bg-primary-dark transition-colors"
-          >
-            Nous contacter
           </Link>
         </div>
       </section>

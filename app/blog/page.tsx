@@ -47,7 +47,7 @@ function getPageNumbers(current: number, total: number): (number | 'ellipsis')[]
 
 export const metadata: Metadata = {
   title: 'Blog',
-  description: "Toutes les actualités et articles de l'association Unis Pour La Trinité Sur Mer.",
+  description: "Toutes les actualités et articles de Unis Pour La Trinité Sur Mer.",
 }
 
 async function CategoryNav({ currentCategory }: { currentCategory?: string }) {
